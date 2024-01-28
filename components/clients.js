@@ -61,11 +61,11 @@ exports.someClients = (req, res) => {
 
 exports.addClient = (req, res) => {
   const client = {
-    name: req.body.name,
-    lastname: req.body.lastname,
-    birth: req.body.birth,
-    phone: req.body.phone,
-    mail: req.body.mail,
+    name: req.body.name ? req.body.name : undefined,
+    lastname: req.body.lastname ? req.body.lastname : undefined,
+    birth: req.body.birth ? req.body.birth : undefined,
+    phone: req.body.phone ? req.body.phone : undefined,
+    mail: req.body.mail ? req.body.mail : undefined,
   };
 
   db("clients")
@@ -112,6 +112,21 @@ exports.editClient = (req, res) => {
     })
     .catch((err) => {
       res.status(500).json({ message: "Error editing client", err });
+      console.log(err);
+    });
+};
+
+exports.deleteClient = (req, res) => {
+  const { id } = req.params;
+
+  db("clients")
+    .where("id", id)
+    .del()
+    .then(() => {
+      res.status(200).json({ message: "Client deleted successfully" });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Error deleting client", err });
       console.log(err);
     });
 };

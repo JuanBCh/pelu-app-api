@@ -12,6 +12,7 @@ const {
   allClients,
   Client,
   editClient,
+  deleteClient,
 } = require("./components/clients");
 const {
   clientTreatments,
@@ -27,6 +28,8 @@ app.get("/client/:id", Client);
 app.post("/addClient", addClient);
 
 app.patch("/updateClient/:id", editClient);
+
+app.delete("/deleteClient/:id", deleteClient);
 
 //TREATMENTS
 app.get("/clientTreatments/:id", clientTreatments);
