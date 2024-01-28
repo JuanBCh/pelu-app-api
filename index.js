@@ -12,7 +12,11 @@ const {
   allClients,
   Client,
 } = require("./components/clients");
-const { clientTreatments, addTreatment } = require("./components/treatments");
+const {
+  clientTreatments,
+  addTreatment,
+  deleteTreatment,
+} = require("./components/treatments");
 
 //CLIENTS
 app.get("/getClients/:query/:limit/:offset", someClients);
@@ -25,6 +29,8 @@ app.post("/addClient", addClient);
 app.get("/clientTreatments/:id", clientTreatments);
 
 app.post("/addTreatment", addTreatment);
+
+app.delete("/deleteTreatment/:id", deleteTreatment);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);

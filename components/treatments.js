@@ -40,3 +40,17 @@ exports.addTreatment = (req, res) => {
       res.status(400).json({ message: "Error adding treatment", err });
     });
 };
+
+exports.deleteTreatment = (req, res) => {
+  const { id } = req.params;
+  db("treatments")
+    .where("id", id)
+    .del()
+    .then(() => {
+      res.status(200).json({ message: "Treatment deleted successfully" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json({ message: "Error deleting treatment", err });
+    });
+};
