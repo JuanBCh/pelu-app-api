@@ -93,3 +93,25 @@ exports.Client = (req, res) => {
       console.log(err);
     });
 };
+
+exports.editClient = (req, res) => {
+  const { id } = req.params;
+  const client = {
+    name: req.body.name ? req.body.name : undefined,
+    lastname: req.body.lastname ? req.body.lastname : undefined,
+    birth: req.body.birth ? req.body.birth : undefined,
+    phone: req.body.phone ? req.body.phone : undefined,
+    mail: req.body.mail ? req.body.mail : undefined,
+  };
+
+  db("clients")
+    .where("id", id)
+    .update(client)
+    .then(() => {
+      res.status(202).json({ message: "Client edited successfully" });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Error editing client", err });
+      console.log(err);
+    });
+};

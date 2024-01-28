@@ -11,6 +11,7 @@ const {
   addClient,
   allClients,
   Client,
+  editClient,
 } = require("./components/clients");
 const {
   clientTreatments,
@@ -24,6 +25,8 @@ app.get("/allClients", allClients);
 app.get("/client/:id", Client);
 
 app.post("/addClient", addClient);
+
+app.patch("/updateClient/:id", editClient);
 
 //TREATMENTS
 app.get("/clientTreatments/:id", clientTreatments);
