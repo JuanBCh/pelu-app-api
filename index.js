@@ -19,6 +19,8 @@ const {
   addTreatment,
   deleteTreatment,
 } = require("./components/treatments");
+const { login, changePass } = require("./components/auth");
+const { validateJWT } = require("./middlewares/jwt");
 
 //CLIENTS
 app.get("/getClients/:query/:limit/:offset", someClients);
@@ -37,6 +39,12 @@ app.get("/clientTreatments/:id", clientTreatments);
 app.post("/addTreatment", addTreatment);
 
 app.delete("/deleteTreatment/:id", deleteTreatment);
+
+//AUTH
+
+app.post("/login", login);
+
+app.patch("/changePassword", validateJWT, changePass);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
