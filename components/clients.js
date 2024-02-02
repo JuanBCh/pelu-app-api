@@ -27,6 +27,8 @@ exports.allClients = (req, res) => {
 
 exports.someClients = (req, res) => {
   const { query, limit, offset } = req.params;
+  const admin = req.admin;
+  console.log(admin);
 
   if (query === "null") {
     db.select("*")
